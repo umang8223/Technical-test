@@ -116,7 +116,7 @@ nginx-release-nginx-deployment   LoadBalancer   10.100.48.144   a47776a-1960.us-
 #### Access NGINX via LoadBalancer:
 Open a web browser and navigate to the EXTERNAL-IP from the previous step. You should see the default NGINX welcome page.
 
-#### Here is the screenshot of [NGINX Deployment](nginx.png)
+#### Here is the screenshot of [NGINX Deployment](images/nginx.png)
 
 ---
 
