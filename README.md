@@ -143,4 +143,4 @@ CI/CD Pipeline triggers when changes are pushed on the main branch.
 5. Tag Image: The above built image is tagged with appropriate ECR Repo URL.
 6. Push to Amazon ECR: Pushes the above tagged to image to ECR Registry.
 
-#### Here is the screenshot of succesful [GitHub Actions](GitHub-actions.png)
+#### Here is the screenshot of succesful [GitHub Actions](images/GitHub-actions.png)
