@@ -51,6 +51,8 @@ aws cloudformation create-stack \
   --template-body file://eks-stack.yaml
 ```
 
+#### Here is the screenshot of [EKS](images/Cluster-node.png) [S3](images/s3.png)
+
 ---
 
 ## How to deploy Helm charts
@@ -114,6 +116,8 @@ nginx-release-nginx-deployment   LoadBalancer   10.100.48.144   a47776a-1960.us-
 #### Access NGINX via LoadBalancer:
 Open a web browser and navigate to the EXTERNAL-IP from the previous step. You should see the default NGINX welcome page.
 
+#### Here is the screenshot of [NGINX Deployment](nginx.png)
+
 ---
 
 ## CI/CD Pipeline
@@ -138,3 +142,5 @@ CI/CD Pipeline triggers when changes are pushed on the main branch.
 4. Build Docker image: It builts the Image based on the Dockerfile located in the repository.
 5. Tag Image: The above built image is tagged with appropriate ECR Repo URL.
 6. Push to Amazon ECR: Pushes the above tagged to image to ECR Registry.
+
+#### Here is the screenshot of succesful [GitHub Actions](GitHub-actions.png)
