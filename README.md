@@ -28,7 +28,7 @@ The first step in the project is to setting up the infrastructure for the applic
 Open your terminal and navigate to the `Technical-test/Infrastructure` directory where the CloudFormation template is located:
 
 ```bash
-cd Technical-test/Infrastructure
+cd path-to-your-repo/Technical-test/Infrastructure
 ```
 
 ### 2. Provision the VPC
@@ -53,7 +53,7 @@ aws cloudformation create-stack \
 
 ---
 
-## How to deploy the Helm chart
+## How to deploy Helm charts
 
 In this task we will create helm chart to deploy it on NGIX Conatiner on EKS Cluster formed in the above task. This deployment is configured to expose the NGINX service with the help of K8s LoadBalancer, it will be accessible from external traffic. This task Involves
 
@@ -89,13 +89,13 @@ kubectl is configured to interact with the EKS cluster (ensure that the kubeconf
 
 ### Create a Helm Chart for NGINX Deployment
 
-#### Initialize helm
-First you need to run the below command to generate a basic helm chart
-
 ```bash
+#### Initialize helm
+
+First you need to run the below command to generate a basic helm chart
 helm create nginx-deployment
 
-This will craete a new directory named nginx-deployment
+This will create a new directory named nginx-deployment
 
 #### Install the Helm Chart on the EKS Cluster:
 helm install nginx-release ./nginx-deployment
@@ -111,7 +111,7 @@ NAME                             TYPE           CLUSTER-IP      EXTERNAL-IP     
 nginx-release-nginx-deployment   LoadBalancer   10.100.48.144   a47776a-1960.us-east-1.elb.amazonaws.com   80:30267/TCP   31m
 ```
 
-# Access NGINX via LoadBalancer:
+#### Access NGINX via LoadBalancer:
 Open a web browser and navigate to the EXTERNAL-IP from the previous step. You should see the default NGINX welcome page.
 
 ---
