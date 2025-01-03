@@ -13,14 +13,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2  # Check out the repository's code
 
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Set AWS region here
+
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1  # Log in to ECR using AWS credentials
-        with:
-          region: us-east-1  # Specify the AWS region
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY_NAME }} .      # Build the image with the repository name (from secrets)
+          docker build -t ${{ secrets.ECR_REPOSITORY_NAME }} .  # Build the image with the repository name (from secrets)
 
       - name: Tag Docker Image
         run: |
