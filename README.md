@@ -12,32 +12,48 @@ This repository shows how to how to provision an Amazon EKS cluster, set up a CI
 ---
 
 ## How to Run IAC Scripts
-The first step in the project is to setuting up the infrastructure for the application with the help of CloudFormation, The below resouces will be created on the execution of CloudFormation script.
+The first step in the project is to setting up the infrastructure for the application with the help of CloudFormation, The below resouces will be created on the execution of CloudFormation script.
 
 - **VPC**
 - **EKS Cluster**
 - **S3 Bucket**
 
-### 1. Provision the VPC
+## Prerequisites
+- AWS CLI is installed and configured with the appropriate credentials.
+- You have access to the CloudFormation template file.
+- The repository contains the CloudFormation template under the `Technical-test/Infrastructure` directory.
+
+### 1. Navigate to the CloudFormation Template Directory
+
+Open your terminal and navigate to the `Technical-test/Infrastructure` directory where the CloudFormation template is located:
+
+```bash
+cd Technical-test/Infrastructure
+```
+
+### 2. Provision the VPC
 Before creating the EKS cluster, the first step is to bring up the required VPC.
 
+```bash
 aws cloudformation create-stack \
   --region us-east-1 \
   --stack-name my-eks-vpc \
   --template-body file://eks-vpc-stack.yaml
+```
 
 ### 2. Provision the EKS-Cluster
 Now we can create the Cluster with the help of Below command and it will setup the cluster with the necessary configuration and IAM roles.
-
+```bash
 aws cloudformation create-stack \
   --region us-east-1 \
   --stack-name my-eks-cluster \
   --capabilities CAPABILITY_NAMED_IAM \
   --template-body file://eks-stack.yaml
+```
 
 ---
 
-## How to deploy the Helm chart.
+## How to deploy the Helm chart
 
 In this task we will create helm chart to deploy it on NGIX Conatiner on EKS Cluster formed in the above task. This deployment is configured to expose the NGINX service with the help of K8s LoadBalancer, it will be accessible from external traffic. This task Involves
 
@@ -50,6 +66,7 @@ EKS Cluster is already created and configured via CDK/CloudFormation.
 kubectl is configured to interact with the EKS cluster (ensure that the kubeconfig is set up correctly).
 
 ### First, make sure that kubectl is installed on your machine. You can verify this by running:
+```bash
 - kubectl version --client
 
 ### Verify Installation of AWS CLI
@@ -66,6 +83,7 @@ kubectl is configured to interact with the EKS cluster (ensure that the kubeconf
 
 ### Check AWS CLI authentication: Ensure your AWS CLI is authenticated properly by running:
 - aws sts get-caller-identity
+```
 
 ### Install Helm on Machine If not, follow the [Helm Installation Guide.](https://helm.sh/docs/intro/install/)
 
@@ -80,21 +98,18 @@ helm create nginx-deployment
 This will craete a new directory named nginx-deployment
 
 #### Install the Helm Chart on the EKS Cluster:
-```bash
 helm install nginx-release ./nginx-deployment
 
 #### Verify the Deployment:
-```bash
 kubectl get pods
 
 #### Check the LoadBalancer URL:
-```bash
 kubectl get svc nginx-release-nginx-deployment
 
-The output will look like this:
-```bash
+#### The output will **look** like this:
 NAME                             TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
 nginx-release-nginx-deployment   LoadBalancer   10.100.48.144   a47776a-1960.us-east-1.elb.amazonaws.com   80:30267/TCP   31m
+```
 
 # Access NGINX via LoadBalancer:
 Open a web browser and navigate to the EXTERNAL-IP from the previous step. You should see the default NGINX welcome page.
