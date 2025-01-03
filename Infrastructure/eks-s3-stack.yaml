@@ -16,15 +16,15 @@ Parameters:
   KubernetesVersion:
     Type: String
     Default: 1.31
+    
+Resources:
 
   # S3 Bucket for storing deployment artifacts
   DeploymentArtifactsBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: "deployment-artifacts-bucket-unique-name"
-    
-Resources:
-
+      BucketName: "deployment-artifacts-bucket-unique-name1"
+      
   ###########################################
   ## Roles
   ###########################################
